@@ -1,0 +1,14 @@
+name: EpicRPGGornik
+version: 0.1-alpha
+main: me.Vark123.EpicRPGGornik.Main
+author: Vark123
+depend: [NBTAPI,MythicMobs,MultiWorld,KeepChunks,CalendarEvents,EpicRPG]
+api-version: 1.16
+
+commands:
+  epicrpggornik:
+    aliases: [erpggornik]
+  epicrpgore:
+    aliases: [erpgore, eore]
+  epicrpgresource:
+    aliases: [esource, erpgsource]
