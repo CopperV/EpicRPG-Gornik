@@ -87,7 +87,7 @@ public final class FileManager {
 		int maxTime = fYml.getInt("cataclysm.max-time", 900);
 		int remainTime = fYml.getInt("cataclysm.remain-time", 900);
 		
-		CataclysmMiner catMiner = new CataclysmMiner(maxTime, remainTime);
+		CataclysmMiner catMiner = new CataclysmMiner(maxTime, remainTime, p);
 		
 		PlayerMiner miner = new PlayerMiner(p, catMiner);
 		return miner;

@@ -20,6 +20,8 @@ public class PlayerMiner {
 		super();
 		this.player = player;
 		this.catMiner = catMiner;
+		
+		this.catMiner.setMiner(this);
 	}
 	
 	public void endTasks() {
