@@ -28,10 +28,13 @@ import org.bukkit.util.Vector;
 
 import com.mojang.datafixers.util.Pair;
 
+import io.lumine.mythic.bukkit.MythicBukkit;
+import io.lumine.mythic.core.items.ItemExecutor;
 import lombok.Getter;
 import lombok.Setter;
 import me.Vark123.EpicRPGGornik.Main;
 import me.Vark123.EpicRPGGornik.OreSystem.Cataclysm.CatOre;
+import me.Vark123.EpicRPGGornik.ResourceSystem.ResourceManager;
 import net.minecraft.network.protocol.game.PacketPlayOutAnimation;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityEquipment;
 import net.minecraft.world.entity.EnumItemSlot;
@@ -59,6 +62,7 @@ public class CataclysmMiner {
 	
 	private BossBar progressBar;
 	
+	//TODO
 	//DEBUFFS
 	@Setter
 	private double debuffGathering;
@@ -90,7 +94,6 @@ public class CataclysmMiner {
 		minedOresTasks.forEach(task -> task.cancel());
 	}
 	
-	//TODO Add bossbar
 	public void startMiningOre(CatOre ore, double power) {
 		miner.setMiningOre(ore);
 		
@@ -161,9 +164,13 @@ public class CataclysmMiner {
 	public void completeMining(CatOre ore) {
 		minedOres.add(ore);
 
-		//TODO
-		//DODANIE DROPU
-		player.sendMessage("Drop itemu");
+		ResourceManager.get().getRandomCataclysmResource().ifPresent(resource -> {
+			ItemExecutor manager = MythicBukkit.inst().getItemManager();
+			ItemStack it = manager.getItemStack(resource.getMmId());
+			
+			player.getWorld().dropItem(ore.getLocation().clone().add(0.5, 1.25, 0.5), it);
+		});
+		//player.sendMessage("Drop itemu");
 		
 		Map<ArmorStand,List<Pair<EnumItemSlot,net.minecraft.world.item.ItemStack>>> eqs = new LinkedHashMap<>();
 		ore.getOre().forEach(stand -> {

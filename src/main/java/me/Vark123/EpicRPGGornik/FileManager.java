@@ -14,6 +14,8 @@ import me.Vark123.EpicRPGGornik.OreSystem.OreManager;
 import me.Vark123.EpicRPGGornik.OreSystem.Cataclysm.CatOre;
 import me.Vark123.EpicRPGGornik.PlayerSystem.CataclysmMiner;
 import me.Vark123.EpicRPGGornik.PlayerSystem.PlayerMiner;
+import me.Vark123.EpicRPGGornik.ResourceSystem.ResourceManager;
+import me.Vark123.EpicRPGGornik.ResourceSystem.Cataclysm.CatResource;
 
 public final class FileManager {
 
@@ -72,7 +74,15 @@ public final class FileManager {
 	}
 	
 	private static void loadResources() {
-		
+		YamlConfiguration fYml = YamlConfiguration.loadConfiguration(cataclysmResources);
+		fYml.getKeys(false).forEach(key -> {
+			String mythicItem = fYml.getString(key+".mythicItem");
+			double chance = fYml.getDouble(key+".chance");
+			int price = fYml.getInt(key+".price");
+			
+			CatResource resource = new CatResource(mythicItem, chance, price);
+			ResourceManager.get().registerResource(resource);
+		});
 	}
 	
 	public static PlayerMiner loadPlayer(Player p) {
