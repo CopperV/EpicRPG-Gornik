@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import lombok.Getter;
 import me.Vark123.EpicRPGGornik.OreSystem.OreManager;
+import me.Vark123.EpicRPGGornik.PlayerSystem.PlayerManager;
 
 @Getter
 public class Main extends JavaPlugin {
@@ -28,6 +29,7 @@ public class Main extends JavaPlugin {
 		CommandManager.setExecutors();
 		FileManager.init();
 		
+		Bukkit.getOnlinePlayers().forEach(PlayerManager.get()::registerPlayer);
 	}
 
 	@Override
@@ -36,6 +38,8 @@ public class Main extends JavaPlugin {
 		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "killall all F_RPG_Cave");
 		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "killall armorstand F_RPG_Cave");
 		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "killall named F_RPG_Cave");
+
+		Bukkit.getOnlinePlayers().forEach(PlayerManager.get()::unregisterPlayer);
 	}
 	
 }

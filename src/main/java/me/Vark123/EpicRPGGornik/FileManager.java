@@ -8,9 +8,12 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 import me.Vark123.EpicRPGGornik.OreSystem.OreManager;
 import me.Vark123.EpicRPGGornik.OreSystem.Cataclysm.CatOre;
+import me.Vark123.EpicRPGGornik.PlayerSystem.CataclysmMiner;
+import me.Vark123.EpicRPGGornik.PlayerSystem.PlayerMiner;
 
 public final class FileManager {
 
@@ -70,6 +73,45 @@ public final class FileManager {
 	
 	private static void loadResources() {
 		
+	}
+	
+	public static PlayerMiner loadPlayer(Player p) {
+		File pFile = new File(playerDir, p.getUniqueId().toString()+".yml");
+		if(!pFile.exists())
+			try {
+				pFile.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		YamlConfiguration fYml = YamlConfiguration.loadConfiguration(pFile);
+		int maxTime = fYml.getInt("cataclysm.max-time", 900);
+		int remainTime = fYml.getInt("cataclysm.remain-time", 900);
+		
+		CataclysmMiner catMiner = new CataclysmMiner(maxTime, remainTime);
+		
+		PlayerMiner miner = new PlayerMiner(p, catMiner);
+		return miner;
+	}
+	
+	public static void savePlayer(PlayerMiner miner) {
+		Player p = miner.getPlayer();
+		File pFile = new File(playerDir, p.getUniqueId().toString()+".yml");
+		if(!pFile.exists())
+			try {
+				pFile.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		YamlConfiguration fYml = YamlConfiguration.loadConfiguration(pFile);
+		
+		fYml.set("cataclysm.max-time", miner.getCatMiner().getMaxTime());
+		fYml.set("cataclysm.remain-time", miner.getCatMiner().getRemainTime());
+		
+		try {
+			fYml.save(pFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
