@@ -16,7 +16,7 @@ public class CataclysmModificatedDebuff {
 	private double modifier;
 	
 	public double getChance() {
-		double toReturn = debuff.getChance() - modifier;
+		double toReturn = debuff.getChance()*(1-modifier);
 		if(toReturn < 0)
 			toReturn = 0;
 		return toReturn;

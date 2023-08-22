@@ -11,6 +11,7 @@ import java.util.Random;
 import java.util.TreeMap;
 
 import org.apache.commons.lang3.mutable.MutableDouble;
+import org.apache.commons.lang3.mutable.MutableInt;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -26,12 +27,14 @@ import org.bukkit.craftbukkit.v1_18_R2.inventory.CraftItemStack;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import com.mojang.datafixers.util.Pair;
 
+import de.tr7zw.nbtapi.NBTItem;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.items.ItemExecutor;
 import lombok.Getter;
@@ -81,6 +84,10 @@ public class CataclysmMiner {
 	
 	//TODO
 	//Staty
+	@Setter
+	private double fatigueEffect;
+	@Setter
+	private double gasEffect;
 	@Setter
 	private int bonusTime;
 	
@@ -274,8 +281,44 @@ public class CataclysmMiner {
 	public void calculateDebuffs() {
 		debuffChanceList.clear();
 		
-		//TODO
-		//READING STATS FROM ARMOR
+		MutableDouble dizzy = new MutableDouble();
+		MutableDouble blindness = new MutableDouble();
+		MutableDouble fatigue = new MutableDouble();
+		MutableDouble gas = new MutableDouble();
+		MutableDouble fatigueEffect = new MutableDouble();
+		MutableDouble gasEffect = new MutableDouble();
+		MutableInt bonusTime = new MutableInt();
+		
+		PlayerInventory inv = player.getInventory();
+		List<NBTItem> items = new LinkedList<>();
+		if(inv.getHelmet() != null) items.add(new NBTItem(inv.getHelmet()));
+		if(inv.getChestplate() != null) items.add(new NBTItem(inv.getChestplate()));
+		if(inv.getLeggings() != null) items.add(new NBTItem(inv.getLeggings()));
+		if(inv.getBoots() != null) items.add(new NBTItem(inv.getBoots()));
+		items.forEach(nbt -> {
+			if(nbt.hasTag("deZawrot"))
+				dizzy.add(Double.parseDouble(nbt.getString("deZawrot")));
+			if(nbt.hasTag("deSlepota"))
+				blindness.add(Double.parseDouble(nbt.getString("deSlepota")));
+			if(nbt.hasTag("deZmeczenie"))
+				fatigue.add(Double.parseDouble(nbt.getString("deZmeczenie")));
+			if(nbt.hasTag("deOpary"))
+				gas.add(Double.parseDouble(nbt.getString("deOpary")));
+			if(nbt.hasTag("deZmeczenieEffect"))
+				fatigueEffect.add(Double.parseDouble(nbt.getString("deZmeczenieEffect")));
+			if(nbt.hasTag("deOparyEffect"))
+				gasEffect.add(Double.parseDouble(nbt.getString("deOparyEffect")));
+			if(nbt.hasTag("bonusTime"))
+				bonusTime.add(Integer.parseInt(nbt.getString("bonusTime")));
+		});
+		
+		debuffList.get("dizzy").setModifier(dizzy.getValue());
+		debuffList.get("blindness").setModifier(blindness.getValue());
+		debuffList.get("fatigue").setModifier(fatigue.getValue());
+		debuffList.get("gas").setModifier(gas.getValue());
+		this.fatigueEffect = fatigueEffect.getValue();
+		this.gasEffect = gasEffect.getValue();
+		this.bonusTime = bonusTime.getValue();
 		
 		MutableDouble maxChance = new MutableDouble();
 		debuffList.values().stream()
