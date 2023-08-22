@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import io.github.rysefoxx.inventory.plugin.pagination.InventoryManager;
 import lombok.Getter;
+import me.Vark123.EpicRPGGornik.CataclysmControllers.CatMineController;
 import me.Vark123.EpicRPGGornik.OreSystem.OreManager;
 import me.Vark123.EpicRPGGornik.PlayerSystem.PlayerManager;
 
@@ -35,6 +36,8 @@ public class Main extends JavaPlugin {
 		CommandManager.setExecutors();
 		FileManager.init();
 		
+		CatMineController.get().start();
+		
 		Bukkit.getOnlinePlayers().forEach(PlayerManager.get()::registerPlayer);
 	}
 
@@ -44,6 +47,8 @@ public class Main extends JavaPlugin {
 		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "killall all F_RPG_Cave");
 		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "killall armorstand F_RPG_Cave");
 		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "killall named F_RPG_Cave");
+		
+		CatMineController.get().stop();
 
 		Bukkit.getOnlinePlayers().forEach(PlayerManager.get()::unregisterPlayer);
 	}

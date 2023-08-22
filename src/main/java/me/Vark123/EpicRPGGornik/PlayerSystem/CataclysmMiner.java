@@ -7,7 +7,10 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.TreeMap;
 
+import org.apache.commons.lang3.mutable.MutableDouble;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -15,6 +18,7 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
@@ -33,6 +37,9 @@ import io.lumine.mythic.core.items.ItemExecutor;
 import lombok.Getter;
 import lombok.Setter;
 import me.Vark123.EpicRPGGornik.Main;
+import me.Vark123.EpicRPGGornik.CataclysmControllers.ADebuff;
+import me.Vark123.EpicRPGGornik.CataclysmControllers.CatMineController;
+import me.Vark123.EpicRPGGornik.CataclysmControllers.DebuffImpl.NoDebuff;
 import me.Vark123.EpicRPGGornik.OreSystem.Cataclysm.CatOre;
 import me.Vark123.EpicRPGGornik.PlayerSystem.Events.OreDropEvent;
 import me.Vark123.EpicRPGGornik.ResourceSystem.ResourceManager;
@@ -63,10 +70,19 @@ public class CataclysmMiner {
 	
 	private BossBar progressBar;
 	
+	private BossBar oxygenBar;
+	
 	//TODO
 	//DEBUFFS
+	private Map<String, CataclysmModificatedDebuff> debuffList;
+	private TreeMap<Double, CataclysmModificatedDebuff> debuffChanceList;
 	@Setter
 	private double debuffGathering;
+	
+	//TODO
+	//Staty
+	@Setter
+	private int bonusTime;
 	
 	public CataclysmMiner(int maxTime, int remainTime, Player player) {
 		super();
@@ -78,6 +94,10 @@ public class CataclysmMiner {
 		progressBar.setVisible(false);
 		progressBar.addPlayer(player);
 		
+		oxygenBar = Bukkit.createBossBar(null, BarColor.WHITE, BarStyle.SEGMENTED_20, BarFlag.CREATE_FOG);
+		oxygenBar.setVisible(false);
+		oxygenBar.addPlayer(player);
+		
 		joinDelayTask = new BukkitRunnable() {
 			
 			@Override
@@ -85,6 +105,15 @@ public class CataclysmMiner {
 				joinDelay = true;
 			}
 		}.runTaskLater(Main.getInst(), 20*60);
+		
+		//init
+		debuffList = new LinkedHashMap<>();
+		CatMineController.get().getDebuffList().forEach(debuff -> {
+			debuffList.put(debuff.getId(), new CataclysmModificatedDebuff(debuff, 0));
+		});
+		
+		debuffChanceList = new TreeMap<>();
+		calculateDebuffs();
 	}
 	
 	public void endTasks() {
@@ -221,7 +250,7 @@ public class CataclysmMiner {
 		return targetAngle < angle;
 	}
 	
-	private void updateProgressBar(CatOre ore) {
+	public void updateProgressBar(CatOre ore) {
 		double percent = oreDurability / ore.getDurability();
 		if(percent < 0)
 			percent = 0;
@@ -229,6 +258,49 @@ public class CataclysmMiner {
 			percent = 1;
 		progressBar.setProgress(percent);
 		progressBar.setTitle("§c§lSpaczona ruda §f- §e§o"+String.format("%.2f", percent * 100)+"%");
+	}
+	
+	public void updateOxygenBar() {
+		oxygenBar.setVisible(true);
+		
+		double percent = ((double)(remainTime+bonusTime)/(double)(maxTime+bonusTime));
+		oxygenBar.setProgress(percent);
+		
+		int seconds = (int) ((remainTime+bonusTime)%60);
+		int minutes = (int) (((remainTime+bonusTime)/60)%60);
+		oxygenBar.setTitle("§3§lZapas tlenu §f§o"+String.format("%02d", minutes)+":"+String.format("%02d", seconds));
+	}
+	
+	public void calculateDebuffs() {
+		debuffChanceList.clear();
+		
+		//TODO
+		//READING STATS FROM ARMOR
+		
+		MutableDouble maxChance = new MutableDouble();
+		debuffList.values().stream()
+			.filter(playerDebuff -> !(playerDebuff.getDebuff() instanceof NoDebuff))
+			.forEach(playerDebuff -> {
+				debuffChanceList.put(maxChance.addAndGet(playerDebuff.getChance()), playerDebuff);
+			});
+		
+		debuffList.values().stream()
+			.filter(playerDebuff -> playerDebuff.getDebuff() instanceof NoDebuff)
+			.findFirst()
+			.ifPresent(playerDebuff -> {
+				if(maxChance.getValue() > playerDebuff.getChance())
+					return;
+				debuffChanceList.put(playerDebuff.getChance(), playerDebuff);
+			});
+	}
+	
+	public ADebuff getRandomDebuff() {
+		if(debuffChanceList.isEmpty())
+			return null;
+		Random rand = new Random();
+		double bound = debuffChanceList.lastKey();
+		return debuffChanceList.ceilingEntry(rand.nextDouble(bound))
+				.getValue().getDebuff();
 	}
 	
 }
