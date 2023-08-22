@@ -69,6 +69,11 @@
 		    <scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>io.github.rysefoxx.inventory</groupId>
+			<artifactId>RyseInventory-Plugin</artifactId>
+			<version>1.6.3</version>
+		</dependency>
+		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.26</version>

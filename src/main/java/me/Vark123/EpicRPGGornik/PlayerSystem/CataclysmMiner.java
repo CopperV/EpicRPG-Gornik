@@ -34,6 +34,7 @@ import lombok.Getter;
 import lombok.Setter;
 import me.Vark123.EpicRPGGornik.Main;
 import me.Vark123.EpicRPGGornik.OreSystem.Cataclysm.CatOre;
+import me.Vark123.EpicRPGGornik.PlayerSystem.Events.OreDropEvent;
 import me.Vark123.EpicRPGGornik.ResourceSystem.ResourceManager;
 import net.minecraft.network.protocol.game.PacketPlayOutAnimation;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityEquipment;
@@ -168,9 +169,14 @@ public class CataclysmMiner {
 			ItemExecutor manager = MythicBukkit.inst().getItemManager();
 			ItemStack it = manager.getItemStack(resource.getMmId());
 			
+			OreDropEvent event = new OreDropEvent(miner, it, ore);
+			Bukkit.getPluginManager().callEvent(event);
+			if(event.isCancelled())
+				return;
+			it = event.getItemOre();
+			
 			player.getWorld().dropItem(ore.getLocation().clone().add(0.5, 1.25, 0.5), it);
 		});
-		//player.sendMessage("Drop itemu");
 		
 		Map<ArmorStand,List<Pair<EnumItemSlot,net.minecraft.world.item.ItemStack>>> eqs = new LinkedHashMap<>();
 		ore.getOre().forEach(stand -> {
