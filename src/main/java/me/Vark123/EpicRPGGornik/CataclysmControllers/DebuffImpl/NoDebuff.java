@@ -12,7 +12,7 @@ public class NoDebuff extends ADebuff {
 
 	@Override
 	public void doAction(Player p) {
-		p.sendMessage("Wyznaczam debuffa - nothing");
+		
 	}
 
 }

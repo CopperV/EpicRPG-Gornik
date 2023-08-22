@@ -5,6 +5,7 @@ import java.util.HashSet;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -64,17 +65,22 @@ public final class CatMineController {
 							RpgPlayer rpg = me.Vark123.EpicRPG.Players
 									.PlayerManager.getInstance().getRpgPlayer(p);
 							if(rpg.getInfo().getLevel() < 50) {
-								p.setHealth(0);
+								killPlayer(p);
 								return;
 							}
 							
 							CataclysmMiner catMiner = miner.getCatMiner();
+							if(catMiner.getRemainTime() + catMiner.getBonusTime() < 0) {
+								killPlayer(p);
+								return;
+							}
+							
 							catMiner.updateOxygenBar();
 							if(!catMiner.isJoinDelay())
 								return;
 							catMiner.setRemainTime(catMiner.getRemainTime() - 1);
 						}, () -> {
-							p.setHealth(0);
+							killPlayer(p);
 						});
 					});
 			}
@@ -99,7 +105,12 @@ public final class CatMineController {
 							ADebuff debuff = catMiner.getRandomDebuff();
 							if(debuff == null)
 								return;
-							debuff.doAction(p);
+							new BukkitRunnable() {
+								@Override
+								public void run() {
+									debuff.doAction(p);
+								}
+							}.runTask(Main.getInst());
 						});
 					});
 			}
@@ -113,6 +124,15 @@ public final class CatMineController {
 		if(debuffController != null
 				&& !debuffController.isCancelled())
 			debuffController.cancel();
+	}
+	
+	private void killPlayer(Player p) {
+		new BukkitRunnable() {
+			@Override
+			public void run() {
+				p.setHealth(0);
+			}
+		}.runTask(Main.getInst());
 	}
 	
 }
