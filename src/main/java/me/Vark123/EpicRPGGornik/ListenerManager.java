@@ -2,6 +2,7 @@ package me.Vark123.EpicRPGGornik;
 
 import org.bukkit.Bukkit;
 
+import me.Vark123.EpicRPGGornik.CataclysmControllers.Listeners.CataclysmMineResetListener;
 import me.Vark123.EpicRPGGornik.PlayerSystem.Listeners.PlayerArmorChangeListener;
 import me.Vark123.EpicRPGGornik.PlayerSystem.Listeners.PlayerExitMineListener;
 import me.Vark123.EpicRPGGornik.PlayerSystem.Listeners.PlayerJoinListener;
@@ -21,6 +22,8 @@ public final class ListenerManager {
 		Bukkit.getPluginManager().registerEvents(new PlayerArmorChangeListener(), inst);
 
 		Bukkit.getPluginManager().registerEvents(new CataclysmOreGatheringListener(), inst);
+		
+		Bukkit.getPluginManager().registerEvents(new CataclysmMineResetListener(), inst);
 	}
 	
 }

@@ -96,8 +96,9 @@ public final class FileManager {
 		YamlConfiguration fYml = YamlConfiguration.loadConfiguration(pFile);
 		int maxTime = fYml.getInt("cataclysm.max-time", 900);
 		int remainTime = fYml.getInt("cataclysm.remain-time", 900);
+		long lastResetTime = fYml.getLong("cataclysm.last-reset", Main.getInst().getCalendar().getNextCallsOfEvents().get("reset_mines") - (1000*60*60*24));
 		
-		CataclysmMiner catMiner = new CataclysmMiner(maxTime, remainTime, p);
+		CataclysmMiner catMiner = new CataclysmMiner(maxTime, remainTime, lastResetTime, p);
 		
 		PlayerMiner miner = new PlayerMiner(p, catMiner);
 		return miner;
@@ -116,6 +117,7 @@ public final class FileManager {
 		
 		fYml.set("cataclysm.max-time", miner.getCatMiner().getMaxTime());
 		fYml.set("cataclysm.remain-time", miner.getCatMiner().getRemainTime());
+		fYml.set("cataclysm.last-reset", miner.getCatMiner().getLastResetTime());
 		
 		try {
 			fYml.save(pFile);

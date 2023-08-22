@@ -61,6 +61,8 @@ public class CataclysmMiner {
 	private int maxTime;
 	@Setter
 	private int remainTime;
+	@Setter
+	private long lastResetTime;
 	
 	private BukkitTask joinDelayTask;
 	private boolean joinDelay;
@@ -91,11 +93,17 @@ public class CataclysmMiner {
 	@Setter
 	private int bonusTime;
 	
-	public CataclysmMiner(int maxTime, int remainTime, Player player) {
+	public CataclysmMiner(int maxTime, int remainTime, long lastResetTime, Player player) {
 		super();
 		this.maxTime = maxTime;
 		this.remainTime = remainTime;
+		this.lastResetTime = lastResetTime;
 		this.player = player;
+
+		if(Main.getInst().getCalendar().getNextCallsOfEvents().get("reset_mines") - lastResetTime > (1000*60*60*24)) {
+			this.remainTime = this.maxTime;
+			this.lastResetTime = Main.getInst().getCalendar().getNextCallsOfEvents().get("reset_mines") - (1000*60*60*24);
+		}
 		
 		progressBar = Bukkit.createBossBar(null, BarColor.RED, BarStyle.SOLID);
 		progressBar.setVisible(false);
