@@ -39,6 +39,7 @@ import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.items.ItemExecutor;
 import lombok.Getter;
 import lombok.Setter;
+import me.Vark123.EpicRPG.Utils.Utils;
 import me.Vark123.EpicRPGGornik.Main;
 import me.Vark123.EpicRPGGornik.CataclysmControllers.ADebuff;
 import me.Vark123.EpicRPGGornik.CataclysmControllers.CatMineController;
@@ -77,15 +78,11 @@ public class CataclysmMiner {
 	
 	private BossBar oxygenBar;
 	
-	//TODO
-	//DEBUFFS
 	private Map<String, CataclysmModificatedDebuff> debuffList;
 	private TreeMap<Double, CataclysmModificatedDebuff> debuffChanceList;
 	@Setter
 	private double debuffGathering;
 	
-	//TODO
-	//Staty
 	@Setter
 	private double fatigueEffect;
 	@Setter
@@ -219,7 +216,7 @@ public class CataclysmMiner {
 				return;
 			it = event.getItemOre();
 			
-			player.getWorld().dropItem(ore.getLocation().clone().add(0.5, 1.25, 0.5), it);
+			Utils.dropItemStack(player, it);
 		});
 		
 		Map<ArmorStand,List<Pair<EnumItemSlot,net.minecraft.world.item.ItemStack>>> eqs = new LinkedHashMap<>();
