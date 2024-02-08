@@ -19,6 +19,9 @@ public class OreDropEvent extends Event implements Cancellable {
 	@Setter
 	private ItemStack itemOre;
 	private AOre ore;
+	
+	@Setter
+	private boolean cancelled;
 
 	public OreDropEvent(PlayerMiner miner, ItemStack itemOre, AOre ore) {
 		super();
@@ -26,9 +29,6 @@ public class OreDropEvent extends Event implements Cancellable {
 		this.itemOre = itemOre;
 		this.ore = ore;
 	}
-	
-	@Setter
-	private boolean cancelled;
 
 	@Override
 	public HandlerList getHandlers() {
