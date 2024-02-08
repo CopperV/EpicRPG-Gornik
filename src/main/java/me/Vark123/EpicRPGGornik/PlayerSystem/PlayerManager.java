@@ -24,7 +24,6 @@ public final class PlayerManager {
 		return inst;
 	}
 	
-	//TODO
 	public PlayerMiner registerPlayer(Player p) {
 		PlayerMiner miner = FileManager.loadPlayer(p);
 		return miners.put(p, miner);

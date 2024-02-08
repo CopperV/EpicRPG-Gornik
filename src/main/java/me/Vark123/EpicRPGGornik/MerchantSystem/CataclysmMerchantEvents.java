@@ -40,9 +40,6 @@ public final class CataclysmMerchantEvents {
 
 	private final EventCreator<InventoryClickEvent> clickEventCreator() {
 		Consumer<InventoryClickEvent> event = e -> {
-			if(e.isCancelled())
-				return;
-			
 			ItemStack it = e.getCurrentItem();
 			if(it == null || !it.equals(CataclysmMerchantManager.get().getSell()))
 				return;
@@ -76,7 +73,7 @@ public final class CataclysmMerchantEvents {
 			}
 			
 			if(totalSale != 0) {
-				CoinsSystem.getInstance().addCoins(rpg, (int) totalSale);
+				CoinsSystem.getInstance().addCoins(rpg, (int) totalSale, "sell");
 			}
 			p.closeInventory();
 		};
