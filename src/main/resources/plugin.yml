@@ -11,3 +11,5 @@ libraries:
 commands:
   oremerchant:
     aliases: [omerchant,omerch,okupiec]
+  tanalorrrepair:
+  pickaxeupgrade:

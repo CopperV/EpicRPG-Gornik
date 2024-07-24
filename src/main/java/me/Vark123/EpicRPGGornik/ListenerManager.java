@@ -8,6 +8,7 @@ import me.Vark123.EpicRPGGornik.PlayerSystem.Listeners.PlayerExitMineListener;
 import me.Vark123.EpicRPGGornik.PlayerSystem.Listeners.PlayerJoinListener;
 import me.Vark123.EpicRPGGornik.PlayerSystem.Listeners.PlayerQuitListener;
 import me.Vark123.EpicRPGGornik.PlayerSystem.Listeners.Cataclysm.CataclysmOreGatheringListener;
+import me.Vark123.EpicRPGGornik.Tanalorr.Listeners.TanalorrBlockBreakListener;
 
 public final class ListenerManager {
 
@@ -24,6 +25,8 @@ public final class ListenerManager {
 		Bukkit.getPluginManager().registerEvents(new CataclysmOreGatheringListener(), inst);
 		
 		Bukkit.getPluginManager().registerEvents(new CataclysmMineResetListener(), inst);
+
+		Bukkit.getPluginManager().registerEvents(new TanalorrBlockBreakListener(), inst);
 	}
 	
 }

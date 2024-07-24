@@ -1,0 +1,527 @@
+worlds:
+- Tanalorr
+max-player-level: 15
+ore-update-amount: 250
+ores:
+  1:
+    material: WAXED_WEATHERED_COPPER
+    lucky: 0
+  2:
+    material: WAXED_OXIDIZED_COPPER
+    lucky: 0.25
+  3:
+    material: WAXED_OXIDIZED_CUT_COPPER
+    lucky: 0.5
+upgrades:
+  lucky:
+    display: "&4★ &8Szczescie: "
+    levels:
+      0:
+        id: lucky_0
+        value-display: "&7&o0%"
+        value: 0
+      1:
+        id: lucky_1
+        value-display: "&7&o1%"
+        value: 0.01
+        costs:
+          coins: 18750
+      2:
+        id: lucky_2
+        value-display: "&7&o2%"
+        value: 0.02
+        costs:
+          money: 15000
+          ruda: 1850
+      3:
+        id: lucky_3
+        value-display: "&7&o3%"
+        value: 0.03
+        costs:
+          coins: 31250
+          stygia: 2500
+      4:
+        id: lucky_4
+        value-display: "&7&o4%"
+        value: 0.04
+        costs:
+          ruda: 9400
+      5:
+        id: lucky_5
+        value-display: "&7&o5%"
+        value: 0.05
+        costs:
+          stygia: 5000
+          ruda: 6250
+      6:
+        id: lucky_6
+        value-display: "&7&o6%"
+        value: 0.06
+        costs:
+          money: 130000
+      7:
+        id: lucky_7
+        value-display: "&7&o7%"
+        value: 0.07
+        costs:
+          coins: 100000
+          stygia: 4000
+          ruda: 5000
+      8:
+        id: lucky_8
+        value-display: "&7&o8%"
+        value: 0.08
+        costs:
+          money: 100000
+          stygia: 5000
+          ruda: 6250
+      9:
+        id: lucky_9
+        value-display: "&7&o9%"
+        value: 0.09
+        costs:
+          stygia: 25000
+      10:
+        id: lucky_10
+        value-display: "&7&o10%"
+        value: 0.1
+        costs:
+          money: 75000
+          coins: 79000
+          stygia: 7500
+          ruda: 7850
+      11:
+        id: lucky_11
+        value-display: "&7&o11%"
+        value: 0.11
+        costs:
+          money: 175000
+          stygia: 17500
+      12:
+        id: lucky_12
+        value-display: "&7&o12%"
+        value: 0.12
+        costs:
+          coins: 250000
+          ruda: 25000
+      13:
+        id: lucky_13
+        value-display: "&7&o13%"
+        value: 0.13
+        costs:
+          money: 150000
+          coins: 187500
+          stygia: 15000
+      14:
+        id: lucky_14
+        value-display: "&7&o14%"
+        value: 0.14
+        costs:
+          money: 165000
+          coins: 210000
+          ruda: 20850
+      15:
+        id: lucky_15
+        value-display: "&7&o15%"
+        value: 0.15
+        costs:
+          money: 192500
+          stygia: 19250
+          ruda: 24000
+      16:
+        id: lucky_16
+        value-display: "&7&o16%"
+        value: 0.16
+        costs:
+          money: 650000
+      17:
+        id: lucky_17
+        value-display: "&7&o17%"
+        value: 0.17
+        costs:
+          coins: 930000
+      18:
+        id: lucky_18
+        value-display: "&7&o18%"
+        value: 0.18
+        costs:
+          stygia: 85000
+      19:
+        id: lucky_19
+        value-display: "&7&o19%"
+        value: 0.19
+        costs:
+          ruda: 120000
+      20:
+        id: lucky_20
+        value-display: "&7&o20%"
+        value: 0.2
+        costs:
+          money: 275000
+          coins: 345000
+          stygia: 27500
+          ruda: 34500
+      21:
+        id: lucky_21
+        value-display: "&7&o21%"
+        value: 0.21
+        costs:
+          coins: 520000
+          stygia: 42000
+          ruda: 51750
+      22:
+        id: lucky_22
+        value-display: "&7&o22%"
+        value: 0.22
+        costs:
+          money: 700000
+          coins: 875000
+      23:
+        id: lucky_23
+        value-display: "&7&o23%"
+        value: 0.23
+        costs:
+          stygia: 77500
+          ruda: 96500
+      24:
+        id: lucky_24
+        value-display: "&7&o24%"
+        value: 0.24
+        costs:
+          stygia: 175000
+      25:
+        id: lucky_25
+        value-display: "&7&o25%"
+        value: 0.25
+        costs:
+          ruda: 250000
+  handle:
+    display: "&4★ &8Stylisko: "
+    levels:
+      0:
+        id: handle_0
+        value-display: "&e&oWierzba"
+        value: 70
+      1:
+        id: handle_1
+        value-display: "&e&oWiaz"
+        value: 150
+        costs:
+          stygia: 3000
+          ruda: 3750
+      2:
+        id: handle_2
+        value-display: "&e&oKlon"
+        value: 250
+        costs:
+          money: 33750
+          coins: 42000
+      3:
+        id: handle_3
+        value-display: "&e&oCis"
+        value: 375
+        costs:
+          money: 375000
+      4:
+        id: handle_4
+        value-display: "&e&oJesion"
+        value: 525
+        costs:
+          coins: 135000
+      5:
+        id: handle_5
+        value-display: "&e&oBuk"
+        value: 700
+        costs:
+          money: 55500
+          stygia: 5475
+          ruda: 6950
+      6:
+        id: handle_6
+        value-display: "&e&oDab"
+        value: 900
+        costs:
+          coins: 90500
+          stygia: 7245
+          ruda: 9075
+      7:
+        id: handle_7
+        value-display: "&e&oBrzoza"
+        value: 1150
+        costs:
+          money: 71250
+          coins: 90000
+          stygia: 7125
+          ruda: 9000
+      8:
+        id: handle_8
+        value-display: "&e&oSwierk"
+        value: 1400
+        costs:
+          stygia: 18750
+          ruda: 23500
+  edge:
+    display: "&4★ &8Ostrze: "
+    levels:
+      0:
+        id: edge_0
+        value-display: "&&a&oDrewniane"
+        value: 0
+        material: WOODEN_PICKAXE
+      1:
+        id: edge_1
+        value-display: "&7&oKamienne"
+        value: 1
+        material: STONE_PICKAXE
+        costs:
+          coins: 62500
+      2:
+        id: edge_2
+        value-display: "&f&oZelazne"
+        value: 2
+        material: IRON_PICKAXE
+        costs:
+          stygia: 11000
+      3:
+        id: edge_3
+        value-display: "&b&oDiamentowe"
+        value: 3
+        material: DIAMOND_PICKAXE
+        costs:
+          ruda: 25000
+      4:
+        id: edge_4
+        value-display: "&8&oPraelfia stal"
+        value: 4
+        material: NETHERITE_PICKAXE
+        costs:
+          money: 300000
+  convenience:
+    display: "&4★ &8Porecznosc: &7&o"
+    levels:
+      0:
+        id: convenience_0
+        value-display: "0"
+        value: 0
+        attributes:
+          health: -80
+          speed: -0.27
+      1:
+        id: convenience_1
+        value-display: "1"
+        value: 1
+        attributes:
+          health: -66
+          speed: -0.22
+        costs:
+          money: 10000
+          coins: 12500
+          ruda: 1250
+      2:
+        id: convenience_2
+        value-display: "2"
+        value: 2
+        attributes:
+          health: -51
+          speed: -0.16
+        costs:
+          coins: 31250
+          ruda: 3125
+          stygia: 2500
+      3:
+        id: convenience_3
+        value-display: "3"
+        value: 1
+        attributes:
+          health: -40
+          speed: -0.09
+        costs:
+          money: 41500
+          ruda: 5200
+          stygia: 4175
+      4:
+        id: convenience_4
+        value-display: "4"
+        value: 4
+        attributes:
+          health: -25
+          speed: 0
+        costs:
+          money: 87500
+          stygia: 8750
+      5:
+        id: convenience_5
+        value-display: "5"
+        value: 5
+        attributes:
+          health: -5
+          speed: 0.1
+        costs:
+          coins: 156250
+          ruda: 15625
+      6:
+        id: convenience_6
+        value-display: "6"
+        value: 6
+        attributes:
+          health: 20
+          speed: 0.21
+        costs:
+          money: 87500
+          coins: 110000
+          stygia: 8750
+          ruda: 11000
+      7:
+        id: convenience_7
+        value-display: "7"
+        value: 7
+        attributes:
+          health: 50
+          speed: 0.33
+        costs:
+          stygia: 50000
+  prospector:
+    display: "&4★ &8Poszukiwacz zloz: &7&o"
+    levels:
+      0:
+        id: prospector_0
+        value-display: "0%"
+        value: 0
+      1:
+        id: prospector_1
+        value-display: "0.5%"
+        value: 0.005
+        costs:
+          money: 25000
+          stygia: 1250
+          ruda: 1575
+      2:
+        id: prospector_2
+        value-display: "1%"
+        value: 0.01
+        costs:
+          coins: 125000
+      3:
+        id: prospector_3
+        value-display: "1.5%"
+        value: 0.015
+        costs:
+          money: 43750
+          coins: 54680
+          stygia: 4375
+          ruda: 5475
+      4:
+        id: prospector_4
+        value-display: "2%"
+        value: 0.02
+        costs:
+          stygia: 12500
+          ruda: 15625
+      5:
+        id: prospector_5
+        value-display: "2.5%"
+        value: 0.025
+        costs:
+          money: 350000
+      6:
+        id: prospector_6
+        value-display: "3%"
+        value: 0.03
+        costs:
+          money: 187500
+          stygia: 15000
+          ruda: 18750
+      7:
+        id: prospector_7
+        value-display: "3.5%"
+        value: 0.035
+        costs:
+          stygia: 55000
+      8:
+        id: prospector_8
+        value-display: "4%"
+        value: 0.04
+        costs:
+          ruda: 81250
+      9:
+        id: prospector_9
+        value-display: "4.5%"
+        value: 0.045
+        costs:
+          money: 250000
+          coins: 312500
+          stygia: 25000
+      10:
+        id: prospector_10
+        value-display: "5%"
+        value: 0.05
+        costs:
+          money: 500000
+          coins: 625000
+drops:
+  1:
+    id: Tanalorr_CaveDrop1
+    chance: 0.12
+  2:
+    id: Tanalorr_CaveDrop_Egg1
+    chance: 0.11
+  3:
+    id: Tanalorr_CaveDrop2
+    chance: 0.1
+  4:
+    id: Tanalorr_CaveDrop_Egg2
+    chance: 0.1
+  5:
+    id: Tanalorr_CaveDrop3
+    chance: 0.09
+  6:
+    id: Tanalorr_CaveDrop_Egg3
+    chance: 0.08
+  7:
+    id: Tanalorr_CaveDrop4
+    chance: 0.07
+  8:
+    id: Tanalorr_CaveDrop_Egg4
+    chance: 0.06
+  9:
+    id: Tanalorr_CaveDrop5
+    chance: 0.0525
+  10:
+    id: Tanalorr_CaveDrop_Egg5
+    chance: 0.045
+  11:
+    id: Tanalorr_CaveDrop6
+    chance: 0.0375
+  12:
+    id: Tanalorr_CaveDrop_Egg6
+    chance: 0.03
+  13:
+    id: Tanalorr_CaveDrop7
+    chance: 0.025
+  14:
+    id: Tanalorr_CaveDrop_Egg7
+    chance: 0.02
+  15:
+    id: Tanalorr_CaveDrop8
+    chance: 0.015
+  16:
+    id: Tanalorr_CaveDrop_Egg8
+    chance: 0.0125
+  17:
+    id: Tanalorr_CaveDrop9
+    chance: 0.01
+  18:
+    id: Tanalorr_CaveDrop_Egg9
+    chance: 0.0075
+  19:
+    id: Tanalorr_CaveDrop10
+    chance: 0.005
+  20:
+    id: Tanalorr_CaveDrop_Egg10
+    chance: 0.004
+  21:
+    id: Tanalorr_CaveDrop11
+    chance: 0.003
+  22:
+    id: Tanalorr_CaveDrop_Egg11
+    chance: 0.003

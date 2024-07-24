@@ -10,12 +10,15 @@ import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
+import lombok.Getter;
 import me.Vark123.EpicRPGGornik.OreSystem.OreManager;
 import me.Vark123.EpicRPGGornik.OreSystem.Cataclysm.CatOre;
 import me.Vark123.EpicRPGGornik.PlayerSystem.CataclysmMiner;
 import me.Vark123.EpicRPGGornik.PlayerSystem.PlayerMiner;
+import me.Vark123.EpicRPGGornik.PlayerSystem.TanalorrMiner;
 import me.Vark123.EpicRPGGornik.ResourceSystem.ResourceManager;
 import me.Vark123.EpicRPGGornik.ResourceSystem.Cataclysm.CatResource;
+import me.Vark123.EpicRPGGornik.Tanalorr.TanalorrConfig;
 
 public final class FileManager {
 
@@ -24,6 +27,10 @@ public final class FileManager {
 	private static File cataclysmDir = new File(Main.getInst().getDataFolder(), "cataclysm");
 	private static File cataclysmResources = new File(cataclysmDir, "resources.yml");
 	private static File cataclysmOres = new File(cataclysmDir, "ores.yml");
+
+	private static File tanalorrDir = new File(Main.getInst().getDataFolder(), "tanalorr");
+	@Getter
+	private static File tanalorrConfig = new File(tanalorrDir, "tanalorr.yml");
 	
 	private FileManager() { }
 	
@@ -38,6 +45,9 @@ public final class FileManager {
 		if(!cataclysmDir.exists())
 			cataclysmDir.mkdir();
 		
+		if(tanalorrDir.exists())
+			tanalorrDir.mkdir();
+			
 		if(!cataclysmResources.exists())
 			try {
 				cataclysmResources.createNewFile();
@@ -52,8 +62,12 @@ public final class FileManager {
 				e.printStackTrace();
 			}
 		
+		Main.getInst().saveResource("tanalorr/tanalorr.yml", false);
+		
 		loadOres();
 		loadResources();
+		
+		TanalorrConfig.get().load();
 	}
 	
 	private static void loadOres() {
@@ -100,7 +114,12 @@ public final class FileManager {
 		
 		CataclysmMiner catMiner = new CataclysmMiner(maxTime, remainTime, lastResetTime, p);
 		
-		PlayerMiner miner = new PlayerMiner(p, catMiner);
+		int tanalorrLevel = fYml.getInt("tanalorr.level", 0);
+		int tanalorrDiggedOres = fYml.getInt("tanalorr.ores", 0);
+		
+		TanalorrMiner tanMiner = new TanalorrMiner(p, tanalorrLevel, tanalorrDiggedOres);
+		
+		PlayerMiner miner = new PlayerMiner(p, catMiner, tanMiner);
 		return miner;
 	}
 	
@@ -118,6 +137,9 @@ public final class FileManager {
 		fYml.set("cataclysm.max-time", miner.getCatMiner().getMaxTime());
 		fYml.set("cataclysm.remain-time", miner.getCatMiner().getRemainTime());
 		fYml.set("cataclysm.last-reset", miner.getCatMiner().getLastResetTime());
+		
+		fYml.set("tanalorr.level", miner.getTanMiner().getLevel());
+		fYml.set("tanalorr.ores", miner.getTanMiner().getDiggedOres());
 		
 		try {
 			fYml.save(pFile);

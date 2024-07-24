@@ -15,13 +15,16 @@ public class PlayerMiner {
 	private AOre miningOre;
 	
 	private CataclysmMiner catMiner;
+	private TanalorrMiner tanMiner;
 
-	public PlayerMiner(Player player, CataclysmMiner catMiner) {
+	public PlayerMiner(Player player, CataclysmMiner catMiner, TanalorrMiner tanMiner) {
 		super();
 		this.player = player;
 		this.catMiner = catMiner;
+		this.tanMiner = tanMiner;
 		
 		this.catMiner.setMiner(this);
+		this.tanMiner.setMiner(this);
 	}
 	
 	public void endTasks() {
