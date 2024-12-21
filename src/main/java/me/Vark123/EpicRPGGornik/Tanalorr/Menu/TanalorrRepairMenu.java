@@ -74,8 +74,8 @@ public final class TanalorrRepairMenu {
 							it = TanalorrController.get().repairPickaxe(p, it, price);
 							Utils.dropItemStack(p, it);
 							contents.updateOrSet(4, new ItemStack(Material.AIR));
+							p.closeInventory();
 						}
-						p.closeInventory();
 					}));
 				}
 				@Override
@@ -101,6 +101,7 @@ public final class TanalorrRepairMenu {
 					if(it == null || it.getType().equals(Material.AIR))
 						return;
 					Utils.dropItemStack(player, it);
+					inventory.getInventory().clear();
 				}
 			})
 			.build(Main.getInst())

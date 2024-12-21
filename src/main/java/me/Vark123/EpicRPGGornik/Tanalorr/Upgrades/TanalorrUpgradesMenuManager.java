@@ -77,6 +77,7 @@ public class TanalorrUpgradesMenuManager {
 					return;
 				
 				Utils.dropItemStack(player, it);
+				inventory.getInventory().clear();
 			}
 		};
 	}
@@ -216,6 +217,7 @@ public class TanalorrUpgradesMenuManager {
 						return;
 					
 					Utils.dropItemStack(player, pickaxe.getValue());
+					inventory.getInventory().clear();
 				}
 			})
 			.build(Main.getInst())

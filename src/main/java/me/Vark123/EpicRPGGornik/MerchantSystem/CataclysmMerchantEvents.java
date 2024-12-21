@@ -93,6 +93,7 @@ public final class CataclysmMerchantEvents {
 					continue;
 				Utils.dropItemStack(p, it);
 			}
+			inv.clear();
 		};
 		
 		EventCreator<InventoryCloseEvent> creator = new EventCreator<>(InventoryCloseEvent.class, event);
