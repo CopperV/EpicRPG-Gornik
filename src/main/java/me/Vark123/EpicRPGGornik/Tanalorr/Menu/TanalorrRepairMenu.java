@@ -6,14 +6,14 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import io.github.rysefoxx.inventory.plugin.content.IntelligentItem;
-import io.github.rysefoxx.inventory.plugin.content.InventoryContents;
-import io.github.rysefoxx.inventory.plugin.content.InventoryProvider;
-import io.github.rysefoxx.inventory.plugin.enums.DisabledEvents;
-import io.github.rysefoxx.inventory.plugin.enums.DisabledInventoryClick;
-import io.github.rysefoxx.inventory.plugin.enums.TimeSetting;
-import io.github.rysefoxx.inventory.plugin.pagination.RyseInventory;
 import lombok.Getter;
+import me.Vark123.EpicInventory.Content.IntelligentItem;
+import me.Vark123.EpicInventory.Content.InventoryContents;
+import me.Vark123.EpicInventory.Content.InventoryProvider;
+import me.Vark123.EpicInventory.Enums.DisabledEvents;
+import me.Vark123.EpicInventory.Enums.DisabledInventoryClick;
+import me.Vark123.EpicInventory.Enums.TimeSetting;
+import me.Vark123.EpicInventory.Pagination.EpicInventory;
 import me.Vark123.EpicRPG.Utils.Utils;
 import me.Vark123.EpicRPGGornik.Main;
 import me.Vark123.EpicRPGGornik.Tanalorr.TanalorrController;
@@ -50,7 +50,7 @@ public final class TanalorrRepairMenu {
 	}
 	
 	public void openMenu(Player p) {
-		RyseInventory.builder()
+		EpicInventory.builder()
 			.title("§7§lGORNICZY MAJSTER")
 			.rows(2)
 			.period(4, TimeSetting.MILLISECONDS)
@@ -96,7 +96,7 @@ public final class TanalorrRepairMenu {
 					}
 				}
 				@Override
-				public void close(Player player, RyseInventory inventory) {
+				public void close(Player player, EpicInventory inventory) {
 					ItemStack it = inventory.getInventory().getItem(4);
 					if(it == null || it.getType().equals(Material.AIR))
 						return;

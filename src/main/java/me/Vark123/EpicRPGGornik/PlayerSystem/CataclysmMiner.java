@@ -22,8 +22,8 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
-import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_18_R2.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_21_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_21_R1.inventory.CraftItemStack;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -181,17 +181,17 @@ public class CataclysmMiner {
 				
 				oreDurability -= power * (1-debuffGathering);
 
-				((CraftPlayer)player).getHandle().b.a(swing);
+				((CraftPlayer)player).getHandle().c.a(swing);
 				player.playSound(loc, Sound.ENTITY_FISHING_BOBBER_THROW,1,.1f);
-				loc.getWorld().spawnParticle(Particle.BLOCK_CRACK, loc, 10, 0.7f,0.7f,0.7f,0.15f,stone);
-				loc.getWorld().spawnParticle(Particle.BLOCK_CRACK, loc, 20, 0.7f,0.7f,0.7f,0.15f,red);
+				loc.getWorld().spawnParticle(Particle.BLOCK, loc, 10, 0.7f,0.7f,0.7f,0.15f,stone);
+				loc.getWorld().spawnParticle(Particle.BLOCK, loc, 20, 0.7f,0.7f,0.7f,0.15f,red);
 				
 				updateProgressBar(ore);
 
 				if(oreDurability <= 0) {
 					player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
 					player.playSound(ore.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_TWINKLE, 1, 1);
-					loc.getWorld().spawnParticle(Particle.BLOCK_CRACK, loc.add(0, 0.3, 0), 100, 0.7f,0.7f,0.7f,0.15f,red);
+					loc.getWorld().spawnParticle(Particle.BLOCK, loc.add(0, 0.3, 0), 100, 0.7f,0.7f,0.7f,0.15f,red);
 
 					miner.setMiningOre(null);
 					progressBar.setVisible(false);
@@ -231,7 +231,7 @@ public class CataclysmMiner {
 			newEq.add(newPair);
 			
 			PacketPlayOutEntityEquipment packet = new PacketPlayOutEntityEquipment(stand.getEntityId(), newEq);
-			((CraftPlayer)player).getHandle().b.a(packet);
+			((CraftPlayer)player).getHandle().c.a(packet);
 		});
 		
 		BukkitTask task = new BukkitRunnable() {
@@ -242,7 +242,7 @@ public class CataclysmMiner {
 				minedOres.remove(ore);
 				eqs.forEach((stand, eq) -> {
 					PacketPlayOutEntityEquipment packet = new PacketPlayOutEntityEquipment(stand.getEntityId(), eq);
-					((CraftPlayer)player).getHandle().b.a(packet);
+					((CraftPlayer)player).getHandle().c.a(packet);
 				});
 			}
 		}.runTaskLater(Main.getInst(), 20*60);

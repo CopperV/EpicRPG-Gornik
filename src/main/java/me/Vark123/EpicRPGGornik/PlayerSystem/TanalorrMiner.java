@@ -39,7 +39,7 @@ public class TanalorrMiner {
 		
 		player.sendMessage("§7["+Main.getInst().getPrefix()+"§7] §eTwoje zdolnosci gornicze wzrastaja!");
 		player.playSound(player, Sound.ENTITY_PLAYER_LEVELUP, 1, 1.1f);
-		player.spawnParticle(Particle.TOTEM, player.getLocation().add(0, 1, 0), 16, 0.6f, 0.6f, 0.6f, 0.15f);
+		player.spawnParticle(Particle.TOTEM_OF_UNDYING, player.getLocation().add(0, 1, 0), 16, 0.6f, 0.6f, 0.6f, 0.15f);
 	}
 	
 	public double getVariancy() {

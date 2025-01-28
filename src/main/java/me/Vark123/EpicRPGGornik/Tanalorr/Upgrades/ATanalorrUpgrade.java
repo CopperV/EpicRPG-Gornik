@@ -63,7 +63,7 @@ public abstract class ATanalorrUpgrade {
 		nbt.applyNBT(it);
 		
 		p.playSound(p, Sound.BLOCK_ANVIL_USE, 1, 0.85f);
-		p.spawnParticle(Particle.VILLAGER_HAPPY, p.getLocation().clone().add(0, 1.25, 0), 24, .6f, .6f, .6f, .15f);
+		p.spawnParticle(Particle.HAPPY_VILLAGER, p.getLocation().clone().add(0, 1.25, 0), 24, .6f, .6f, .6f, .15f);
 		
 		return it;
 	}

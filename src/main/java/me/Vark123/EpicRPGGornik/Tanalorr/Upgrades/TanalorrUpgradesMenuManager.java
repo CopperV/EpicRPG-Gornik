@@ -10,14 +10,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import de.tr7zw.nbtapi.NBTItem;
-import io.github.rysefoxx.inventory.plugin.content.IntelligentItem;
-import io.github.rysefoxx.inventory.plugin.content.InventoryContents;
-import io.github.rysefoxx.inventory.plugin.content.InventoryProvider;
-import io.github.rysefoxx.inventory.plugin.enums.Action;
-import io.github.rysefoxx.inventory.plugin.enums.DisabledEvents;
-import io.github.rysefoxx.inventory.plugin.enums.DisabledInventoryClick;
-import io.github.rysefoxx.inventory.plugin.pagination.RyseInventory;
 import lombok.Getter;
+import me.Vark123.EpicInventory.Content.IntelligentItem;
+import me.Vark123.EpicInventory.Content.InventoryContents;
+import me.Vark123.EpicInventory.Content.InventoryProvider;
+import me.Vark123.EpicInventory.Enums.Action;
+import me.Vark123.EpicInventory.Enums.DisabledEvents;
+import me.Vark123.EpicInventory.Enums.DisabledInventoryClick;
+import me.Vark123.EpicInventory.Pagination.EpicInventory;
 import me.Vark123.EpicRPG.Utils.Utils;
 import me.Vark123.EpicRPGGornik.Main;
 
@@ -71,7 +71,7 @@ public class TanalorrUpgradesMenuManager {
 				}));
 			}
 			@Override
-			public void close(Player player, RyseInventory inventory) {
+			public void close(Player player, EpicInventory inventory) {
 				ItemStack it = inventory.getInventory().getItem(4);
 				if(it == null || it.getType().equals(Material.AIR))
 					return;
@@ -87,7 +87,7 @@ public class TanalorrUpgradesMenuManager {
 	}
 	
 	public void openBaseMenu(Player p) {
-		RyseInventory.builder()
+		EpicInventory.builder()
 			.title("§6§lULEPSZ KILOF")
 			.rows(1)
 			.disableUpdateTask()
@@ -101,7 +101,7 @@ public class TanalorrUpgradesMenuManager {
 	}
 	
 	private void openMenu(Player p, MutableObject<ItemStack> pickaxe) {
-		RyseInventory.builder()
+		EpicInventory.builder()
 			.title("§6§lULEPSZ KILOF")
 			.rows(1)
 			.disableUpdateTask()
@@ -212,7 +212,7 @@ public class TanalorrUpgradesMenuManager {
 					}
 				}
 				@Override
-				public void close(Player player, RyseInventory inventory) {
+				public void close(Player player, EpicInventory inventory) {
 					if(pickaxe.getValue() == null)
 						return;
 					

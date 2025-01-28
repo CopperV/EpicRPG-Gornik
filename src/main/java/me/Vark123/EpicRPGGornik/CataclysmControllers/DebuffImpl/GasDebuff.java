@@ -17,6 +17,8 @@ public class GasDebuff extends ADebuff {
 		super("gas", .15);
 	}
 
+	//TODO
+	//REFACTOR
 	@Override
 	public void doAction(Player p) {
 		PlayerManager.get().getPlayer(p).ifPresent(miner -> {
@@ -24,7 +26,7 @@ public class GasDebuff extends ADebuff {
 			EntityDamageEvent event = new EntityDamageEvent(p, DamageCause.POISON,
 					p.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() * 0.45* (1 - miner.getCatMiner().getGasEffect()));
 			Bukkit.getPluginManager().callEvent(event);
-			ManualDamage.doDamage(p, event.getFinalDamage(), event);
+			ManualDamage.tryDoDamage(p, event.getFinalDamage(), event);
 		});
 	}
 

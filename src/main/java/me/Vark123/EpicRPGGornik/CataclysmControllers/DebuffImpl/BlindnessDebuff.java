@@ -17,7 +17,7 @@ public class BlindnessDebuff extends ADebuff {
 	public void doAction(Player p) {
 		p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_ATTACK_CRIT, 1, .1f);
 		PotionEffect effect1 = new PotionEffect(PotionEffectType.BLINDNESS, 20*14, 1);
-		PotionEffect effect2 = new PotionEffect(PotionEffectType.SLOW, 20*14, 1);
+		PotionEffect effect2 = new PotionEffect(PotionEffectType.SLOWNESS, 20*14, 1);
 		p.addPotionEffect(effect1);
 		p.addPotionEffect(effect2);
 	}

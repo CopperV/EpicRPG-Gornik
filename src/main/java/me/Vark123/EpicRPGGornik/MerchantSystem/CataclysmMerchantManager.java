@@ -6,12 +6,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import io.github.rysefoxx.inventory.plugin.content.InventoryContents;
-import io.github.rysefoxx.inventory.plugin.content.InventoryProvider;
-import io.github.rysefoxx.inventory.plugin.enums.DisabledEvents;
-import io.github.rysefoxx.inventory.plugin.enums.DisabledInventoryClick;
-import io.github.rysefoxx.inventory.plugin.pagination.RyseInventory;
 import lombok.Getter;
+import me.Vark123.EpicInventory.Content.InventoryContents;
+import me.Vark123.EpicInventory.Content.InventoryProvider;
+import me.Vark123.EpicInventory.Enums.DisabledEvents;
+import me.Vark123.EpicInventory.Enums.DisabledInventoryClick;
+import me.Vark123.EpicInventory.Pagination.EpicInventory;
 import me.Vark123.EpicRPGGornik.Main;
 
 @Getter
@@ -57,7 +57,7 @@ public final class CataclysmMerchantManager {
 	
 	public void openMenu(Player p) {
 		p.playSound(p, Sound.ENTITY_VILLAGER_AMBIENT, 1, .9f);
-		RyseInventory.builder()
+		EpicInventory.builder()
 			.title("§c§lKupiec rud")
 			.rows(2)
 			.ignoredSlots(freeSlots)

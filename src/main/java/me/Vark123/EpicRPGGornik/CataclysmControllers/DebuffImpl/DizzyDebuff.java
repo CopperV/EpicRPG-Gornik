@@ -24,7 +24,7 @@ public class DizzyDebuff extends ADebuff {
 		loc.setYaw(rand.nextFloat()*360);
 		loc.setPitch(rand.nextFloat()*180-90);
 		PotionEffect effect1 = new PotionEffect(PotionEffectType.BLINDNESS, 20*7, 1);
-		PotionEffect effect2 = new PotionEffect(PotionEffectType.CONFUSION, 20*7, 1);
+		PotionEffect effect2 = new PotionEffect(PotionEffectType.NAUSEA, 20*7, 1);
 		p.addPotionEffect(effect1);
 		p.addPotionEffect(effect2);
 		p.teleport(loc);

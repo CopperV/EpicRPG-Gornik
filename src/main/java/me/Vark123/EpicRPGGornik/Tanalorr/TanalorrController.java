@@ -167,7 +167,7 @@ public final class TanalorrController {
 		megaOres.get(p).add(loc);
 
 		p.playSound(p.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 1, 1);
-		p.spawnParticle(Particle.FIREWORKS_SPARK, p.getLocation().add(0, 1, 0), 16, 0.6f, 0.6f, 0.6f, 0.15f);
+		p.spawnParticle(Particle.FIREWORK, p.getLocation().add(0, 1, 0), 16, 0.6f, 0.6f, 0.6f, 0.15f);
 		
 		new BukkitRunnable() {
 			@Override
@@ -293,7 +293,7 @@ public final class TanalorrController {
 		if(itemDurability >= itemMaxDurability) {
 			p.getInventory().setItemInMainHand(null);
 			p.playSound(p, Sound.ENTITY_ITEM_BREAK, 1, 1);
-			p.spawnParticle(Particle.ITEM_CRACK, p.getLocation().add(0,1,0), 16, .5f, .5f, .5f, .1f, it);
+			p.spawnParticle(Particle.ITEM, p.getLocation().add(0,1,0), 16, .5f, .5f, .5f, .1f, it);
 			return;
 		}
 		
@@ -358,7 +358,7 @@ public final class TanalorrController {
 		rpg.getPlayer().sendMessage("§e§o-"+ String.format("%.2f", repairCost) +"$ §7[§e§o"+String.format("%.2f", vault.getMoney())+"$§7]");
 		
 		p.playSound(p, Sound.BLOCK_ANVIL_USE, 1, .8f);
-		p.spawnParticle(Particle.TOTEM, p.getLocation().add(0,1,0), 16, .5f, .5f, .5f, .1f);
+		p.spawnParticle(Particle.TOTEM_OF_UNDYING, p.getLocation().add(0,1,0), 16, .5f, .5f, .5f, .1f);
 		
 		return it;
 	}
